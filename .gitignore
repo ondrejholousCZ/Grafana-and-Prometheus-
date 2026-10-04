@@ -1,0 +1,3 @@
+# Hesla a API klíče zůstávají jen na serveru.
+.env
+secrets/

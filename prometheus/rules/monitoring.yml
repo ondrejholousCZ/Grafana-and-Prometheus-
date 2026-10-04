@@ -1,0 +1,29 @@
+groups:
+  - name: monitoring
+    rules:
+      - alert: PrometheusConfigReloadFailed
+        expr: prometheus_config_last_reload_successful == 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Prometheus nenačetl konfiguraci"
+          description: "Poslední reload konfigurace selhal – zkontroluj logy."
+
+      - alert: PrometheusRuleEvaluationFailures
+        expr: increase(prometheus_rule_evaluation_failures_total[5m]) > 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Chyby při vyhodnocování pravidel"
+          description: "Některá alertovací pravidla se nedaří vyhodnotit."
+
+      - alert: AlertmanagerNotificationsFailing
+        expr: rate(alertmanager_notifications_failed_total[5m]) > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Alertmanager nedokáže odeslat notifikace ({{ $labels.integration }})"
+          description: "Zkontroluj SMTP / webhook nastavení."

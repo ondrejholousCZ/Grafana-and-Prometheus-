@@ -1,0 +1,7 @@
+# - targets: ['ILO_DL360_IP']
+#   labels:
+#     name: dl360-g7
+# - targets: ['ILO_DL380_IP']
+#   labels:
+#     name: dl380-g7
+[]

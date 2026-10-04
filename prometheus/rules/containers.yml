@@ -1,0 +1,22 @@
+groups:
+  - name: containers
+    rules:
+      - alert: ContainerHighCpu
+        expr: sum by (instance, name) (rate(container_cpu_usage_seconds_total{name!=""}[5m])) * 100 > 90
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Kontejner {{ $labels.name }} má vysoké vytížení CPU"
+          description: "CPU: {{ $value | printf \"%.0f\" }} % (100 % = 1 jádro)."
+
+      - alert: ContainerHighMemory
+        expr: |
+          (container_memory_working_set_bytes{name!=""} / container_spec_memory_limit_bytes{name!=""} * 100 > 90)
+          and container_spec_memory_limit_bytes{name!=""} > 0
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Kontejner {{ $labels.name }} se blíží limitu paměti"
+          description: "Využití limitu: {{ $value | printf \"%.0f\" }} %."

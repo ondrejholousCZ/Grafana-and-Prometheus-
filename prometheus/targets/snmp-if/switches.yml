@@ -1,0 +1,5 @@
+- targets: ['10.0.90.11']
+  labels:
+    device_type: switch
+    name: hpe-5130
+    __param_auth: infra_v2

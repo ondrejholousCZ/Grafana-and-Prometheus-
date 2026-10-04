@@ -1,0 +1,47 @@
+{
+  "id": null,
+  "uid": "san-and-switches",
+  "title": "SAN and Switches",
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "tags": ["infrastructure", "snmp"],
+  "templating": {"list": []},
+  "time": {"from": "now-1h", "to": "now"},
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Brocade oper status",
+      "id": 1,
+      "gridPos": {"h": 4, "w": 8, "x": 0, "y": 0},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "brocade_switch_oper_status", "refId": "A"}],
+      "fieldConfig": {"defaults": {"mappings": [{"type": "value", "options": {"1": {"text": "online"}, "2": {"text": "offline"}, "3": {"text": "testing"}, "4": {"text": "faulty"}}}]}}
+    },
+    {
+      "type": "timeseries",
+      "title": "Comware CPU %",
+      "id": 2,
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "comware_entity_cpu_usage_percent", "legendFormat": "{{instance}} {{entity_name}}", "refId": "A"}]
+    },
+    {
+      "type": "stat",
+      "title": "MSA unit status",
+      "id": 3,
+      "gridPos": {"h": 4, "w": 8, "x": 8, "y": 0},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "msa_unit_status", "refId": "A"}]
+    },
+    {
+      "type": "timeseries",
+      "title": "Brocade sensors",
+      "id": 4,
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+      "datasource": {"type": "prometheus", "uid": "prometheus"},
+      "targets": [{"expr": "brocade_sensor_value", "legendFormat": "{{name}} {{sensor_info}}", "refId": "A"}]
+    }
+  ]
+}
