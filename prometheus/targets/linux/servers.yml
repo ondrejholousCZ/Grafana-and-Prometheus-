@@ -1,5 +1,0 @@
-# - targets: ['10.0.0.11:9100']
-#   labels:
-#     instance: srv-app01
-#     env: prod
-[]

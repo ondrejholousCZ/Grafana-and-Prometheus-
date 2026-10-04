@@ -1,7 +1,0 @@
-# - targets: ['10.0.90.21']
-#   labels:
-#     name: SW_1
-# - targets: ['10.0.90.22']
-#   labels:
-#     name: SW_2
-[]
